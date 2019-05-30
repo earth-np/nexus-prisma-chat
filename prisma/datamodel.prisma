@@ -1,0 +1,25 @@
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  messages: [Message]
+  rooms: [Room]
+}
+
+type Message {
+  id: ID! @id
+  text: String!
+  createdAt: DateTime! @createdAt
+  sentBy: User! @relation(link: INLINE)
+  inRoom: Room! @relation(link: INLINE)
+}
+
+type Room {
+  id: ID! @id
+  name: String!
+  users: [User] @relation(link: TABLE)
+  roomMesseges: [Message] 
+}
+
